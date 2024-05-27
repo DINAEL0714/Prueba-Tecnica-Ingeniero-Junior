@@ -1,0 +1,62 @@
+INICIO
+
+    // 1. Inicialización de la Matriz
+    IMPRIMIR "Ingrese el número de filas: "
+    LEER m
+    IMPRIMIR "Ingrese el número de columnas: "
+    LEER n
+
+    // Validar las dimensiones de la matriz
+    SI m <= 0 O n <= 0 ENTONCES
+        IMPRIMIR "Las dimensiones deben ser mayores que 0."
+        FIN
+
+    // 2. Generación de la Matriz
+    INICIALIZAR matriz COMO lista vacía
+    contador = 1
+    PARA i DESDE 0 HASTA m-1 HACER
+        INICIALIZAR fila COMO lista vacía
+        PARA j DESDE 0 HASTA n-1 HACER
+            AÑADIR contador A fila
+            INCREMENTAR contador POR 1
+        AÑADIR fila A matriz
+
+    // 3. Recorrer la Matriz en el Orden Especificado
+    INICIALIZAR valores COMO lista vacía
+    PARA j DESDE 0 HASTA n-1 HACER
+        SI j MOD 2 == 0 ENTONCES
+            PARA i DESDE m-1 HASTA 0 HACER
+                AÑADIR matriz[i][j] A valores
+        SINO
+            PARA i DESDE 0 HASTA m-1 HACER
+                AÑADIR matriz[i][j] A valores
+
+    // 4. Resultados
+    INICIALIZAR primos COMO lista vacía
+    INICIALIZAR impares_contador COMO 0
+
+    PARA CADA numero EN valores HACER
+        SI es_primo(numero) ENTONCES
+            AÑADIR numero A primos
+        SI numero MOD 2 != 0 ENTONCES
+            INCREMENTAR impares_contador POR 1
+
+    ORDENAR valores DE menor A mayor COMO ascendente
+    ORDENAR valores DE mayor A menor COMO descendente
+
+    // Imprimir resultados
+    IMPRIMIR "Valores en su recorrido: ", valores
+    IMPRIMIR "Números primos: ", primos
+    IMPRIMIR "Cantidad de números impares: ", impares_contador
+    IMPRIMIR "Números ordenados de menor a mayor: ", ascendente
+    IMPRIMIR "Números ordenados de mayor a menor: ", descendente
+
+FIN
+
+FUNCION es_primo(numero):
+    SI numero <= 1 ENTONCES
+        RETORNAR FALSO
+    PARA i DESDE 2 HASTA raiz_cuadrada(numero) HACER
+        SI numero MOD i == 0 ENTONCES
+            RETORNAR FALSO
+    RETORNAR VERDADERO
